@@ -3,7 +3,7 @@
 ## Continuos Integration
 
 - Developers frequently push code to a shared repository.
-- Each push triggers an automated build and test process to detect errors early.
+- The pushed code is automatically built and tested to detect errors early.
 - The goal of CI is to ensure that the codebase is always in a working state, reducing integration issues.
 
 ## Continuos Delivery
@@ -28,7 +28,9 @@
 Code → Manual Testing → Wait → Manual Build → Wait → Manual Deploy → Failures = Rollback
 
 - Slow (weeks/months per release)
-- Error-prone (manual steps)
+- Manual steps: Build, Test, Deploy
+- No access management
+- Hard to check logs and history
 - Hard to debug (big changes)
 - Team friction (dev vs ops)
 
@@ -42,6 +44,26 @@ Code → Auto Build → Auto Test → Auto Deploy → Monitor → Feedback
 - Team synergy (dev + ops = DevOps)
 
 > The goal of DevOps is automation, speed, and reliability. CI/CD is the engine that makes it happen.
+
+## CI (Continuous Integration) Phase
+
+- Developer commits code
+- Triggers CI pipeline
+- Code Compilation/Build
+- Unit Tests
+- Code Quality Checks (Linting, Static Analysis)
+- Create Build Artifact (Docker image, JAR, etc.)
+
+## Common Phases for Continuous Delivery (CDE) and Continuous Deployment (CD)
+
+- Auto deploy to dev environment: run integration tests
+- Auto deploy to QA: run UI tests
+- Auto deploy to staging: Run Performance/Security Tests
+
+- In CDE, the final step is manual approval to deploy to production.
+- In CD, the final step is automatic deployment to production.
+
+
 
 # Jenkins
 
@@ -70,14 +92,22 @@ Code → Auto Build → Auto Test → Auto Deploy → Monitor → Feedback
    - Agent runs pipeline stages (build → test → deploy).
    - Results reported back to Controller and stored in database
    - Notifications are sent (e.g., Slack, Email)
+4. Pipeline
+   - Defines the sequence of steps for building, testing, and deploying software.
+   - It should be declarative.
 
 > Plugins: Core of extensibility.
 > Pipelines: Declarative (simple, recommended)
 
+> Error code 137: Out of memory error. To avoid this error, you can increase the memory limit or use controller and agent architecture.
+
+- Jenkins can run two pipelines in parallel in one go.
+- Jenkins can track, save the history and logs of the pipeline.
+
 ## Installation
 
 - update your linux repositories
-- Install Java 17 on your machine `sudo apt install openjdk-17-jdk`
+- Install Java 21 on your machine `sudo apt install openjdk-21-jdk`
 - Install the LTS release
   ```bash
       sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
@@ -89,4 +119,15 @@ Code → Auto Build → Auto Test → Auto Deploy → Monitor → Feedback
       sudo apt install jenkins
   ```
 
-1. Install Docker on same machine
+## Advantages of Jenkins
+
+- Open-source and free
+- Extensible with plugins
+- Cross-platform support
+- Large community and ecosystem
+
+## Disadvantages of Jenkins
+
+- Steep learning curve
+- Requires maintenance
+- Complex configuration

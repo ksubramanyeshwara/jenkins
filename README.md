@@ -24,6 +24,45 @@ This repository contains documentation, examples, and pipeline configurations do
 
 - [Introduction to CI/CD: Concepts, benefits, and Jenkins overview]()
 
+## Useful Commands
+
+- `sudo systemctl status jenkins` - Check Jenkins status
+- `sudo systemctl start jenkins` - Start Jenkins
+- `sudo systemctl stop jenkins` - Stop Jenkins
+- `sudo systemctl restart jenkins` - Restart Jenkins
+- `usermod -aG docker jenkins` - Add Jenkins user to Docker group
+
+**Logs & Troubleshooting (VERY common)**
+
+- sudo journalctl -u jenkins # View Jenkins service logs
+- sudo tail -f /var/log/jenkins/jenkins.log # Live Jenkins logs
+
+**Initial Setup / Access**
+
+- sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+**Network & Port Checks**
+
+- ss -tulnp | grep 8080 # Check Jenkins port
+- curl http://localhost:8080
+
+**Jenkins CLI**
+
+Allows you to run the Jenkins CLI from the command line. It requires jenkins-cli.jar downloaded from Jenkins.
+
+- java -jar jenkins-cli.jar -s http://localhost:8080/ help: It shouws all the available commands
+- java -jar jenkins-cli.jar version: It shows jenkins server version.
+- java -jar jenkins-cli.jar list-plugins: Lists all the plugins installed currently.
+- java -jar jenkins-cli.jar install-plugin <plugin>: Installs a plugin by name.
+- java -jar jenkins-cli.jar restart: Restart the Jenkins server immediately.
+- java -jar jenkins-cli.jar build <job-name>: Start a jenkins job by name.
+
+**Docker Integration**
+
+- docker ps
+- docker images
+- docker logs <container-id>
+
 ## 📫 Connect With Me
 
 <div align="center">
