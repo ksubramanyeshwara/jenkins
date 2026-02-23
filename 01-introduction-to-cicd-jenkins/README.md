@@ -63,8 +63,6 @@ Code → Auto Build → Auto Test → Auto Deploy → Monitor → Feedback
 - In CDE, the final step is manual approval to deploy to production.
 - In CD, the final step is automatic deployment to production.
 
-
-
 # Jenkins
 
 - Jenkins is an open-source automation server used for CI/CD pipelines.
@@ -118,6 +116,65 @@ Code → Auto Build → Auto Test → Auto Deploy → Monitor → Feedback
       sudo apt update
       sudo apt install jenkins
   ```
+
+```sh
+# Enable the Jenkins service to start at boot
+sudo systemctl enable jenkins
+
+# Start the Jenkins service
+sudo systemctl start jenkins
+
+# Check the status of the Jenkins service
+sudo systemctl status jenkins
+```
+
+## Manage Jenkins
+
+It is administration panel of the Jenkins server.
+
+This where where you configure:
+
+- Global settings
+- Tools (Git, Maven, JDK)
+- Security
+- Credentials
+- Plugins
+- Build agents (nodes)
+- System monitoring
+  ![Manage Jenkins](./manage-jenkins.png)
+
+> In jenkins setup jenkin controller(master) and agenets seprately(slave) because if we run all the jobs on the controller(master) then it will be overloaded and will not be able to handle the jobs.
+
+### Tools
+
+It is used to configure tools that are required to run the jobs/pipelines.
+
+- Git
+- JDK
+- Maven
+- Gradle
+- Docker
+
+### Nodes
+
+- Nodes are the machines where the jobs/pipelines are executed.
+- Nodes are basically jenkins agents.
+- Nodes can be physical or virtual machines.
+
+### Credentials
+
+Secure storage for:
+
+- GitHub tokens
+- Docker passwords
+- AWS keys
+- SSH keys
+
+You should NEVER hardcode secrets inside:
+
+- Jenkinsfile
+- Dockerfile
+- Source code
 
 ## Advantages of Jenkins
 
