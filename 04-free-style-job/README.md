@@ -1,51 +1,102 @@
 # Jenkins Jobs
 
-- Jobs are autonated tasks or operations that jenkins runs automatically
-- It is a configured set of instruction that tells jenkins what to do, when to do, and how to do it.
-- Task or Configuration can look like:
-  - Pull code from GitHub
-  - Build the application
-  - Run tests
-  - Create Docker image
-  - Deploy to server
+- Jobs are automated tasks or operations that Jenkins runs automatically.
+- A job is a configured set of instructions that tells Jenkins what to do, when to do it, and how to do it.
 
-## Types of jenkins jobs
+## Tasks or configurations can include:
 
-1. Freestyle Job
-2. Pipeline Job
-3. Multibranch Pipeline Job
+- Pull code from GitHub
+- Build the application
+- Run tests
+- Create Docker image
+- Deploy to server
+
+## Types of Jenkins Jobs
+
+1. **Freestyle Job**
+2. **Pipeline Job**
+3. **Multibranch Pipeline Job**
 
 ## Freestyle Job
 
 - GUI-based configuration
-- Not recommended for complex task.
+- Not recommended for complex tasks
 
 ## Pipeline Job
 
-## Boradgame-maven Job
+- Script-based configuration
+- Recommended for complex tasks
 
-- Jenkins dashboard --> Click on New item
-- Enter Job name --> select Freestyle Project --> OK
-- Enter Description
-- Discard old build and keep only last 5 builds
-- Restrict where this project can be run --> Choose the agent: Here you can choose where you want your job to run
-- Source Code Management --> copy github url from code section and copy HTTPS --> paste it in Repository URL
-- No Credentials as github repo is open
-- Triggers --> It let's job to run based on condition
-  - Poll SCM: H/5 \* \* \* \* (check every 5 minutes)
-  - OR GitHub webhook for instant builds
-- Build Steps --> Invoke top-level Maven targets --> select Maven Version
-- Goals --> compile, repeat it for test and package or use clean package it will compile, test and package
-- Post-build action --> use it for email notification when build is done, etc
-- Click on jobname and click on Build with parameters --> chose the what you want to do with this build.(dev or prod etc)
-- Workspace --> It is a directory where jenkins stores all the files related to the job. Files include source code, build artifacts, logs, target, etc
-- Target --> It is a directory where maven stores the compiled code and build artifacts.
+## Boardgame Freestyle Job
 
-## Java Version
+### Creating the Job
 
-- If you are using java then the project built on lower version java will work with higher version. If it didn't then
-- Go to pluggins --> search for eclipse --> install Eclipse Temurin Installer It help you to configure multiple Java version
-- You configure plugins in tool section
-- JDK installations, add JDK, jdk17 --> Install automatically --> Install from adoptium.net --> select jdk-17.0.14+7
+1. Navigate to Jenkins dashboard and click **New Item**
+2. Enter job name, select **Freestyle Project**, and click **OK**
+3. Enter a description for the job
 
-> GitHub repo should contain, Dockerfile and tests
+### Configuration Options
+
+**Build History Management**
+
+- Configure "Discard old builds" to keep only the last 5 builds
+
+**Parameters**
+
+- **String Parameter**: A parameter that you can pass to the job when you trigger it. This is used to deploy to different environments (dev, test, prod)
+
+**Agent Selection**
+
+- **Restrict where this project can be run**: Choose the agent where you want your job to run
+
+**Source Code Management**
+
+- Copy the GitHub URL from the code section (HTTPS)
+- Paste it in the Repository URL field
+- No credentials required if the GitHub repository is public
+
+**Triggers**
+
+- Configure triggers to let the job run based on specific conditions
+  - **Poll SCM**: `H/5 * * * *` (checks every 5 minutes)
+  - **OR** use GitHub webhook for instant builds
+
+**Build Steps**
+
+- **Invoke top-level Maven targets**: Select the Maven version
+- **Goals**: Use `compile`, `test`, and `package` separately, or use `clean package` to compile, test, and package in one step
+
+**Post-Build Actions**
+
+- Use for email notifications when the build is complete, etc.
+
+### Running the Job
+
+- Click on the job name and select **Build with Parameters**
+- Choose what you want to do with this build (dev, prod, etc.)
+
+### Understanding Key Directories
+
+**Workspace**
+
+- A directory where Jenkins stores all files related to the job
+- Files include source code, build artifacts, logs, target folder, etc.
+
+**Target**
+
+- A directory where Maven stores the compiled code and build artifacts
+
+## Java Version Management
+
+If you are using Java, projects built on lower Java versions will generally work with higher versions. If compatibility issues occur:
+
+1. Navigate to **Plugins** and search for **Eclipse**
+2. Install **Eclipse Temurin Installer** to help configure multiple Java versions
+3. Configure plugins in the **Tools** section:
+   - Go to **JDK installations** and add JDK
+   - Name it (e.g., `jdk17`)
+   - Select **Install automatically**
+   - Choose **Install from adoptium.net**
+   - Select `jdk-17.0.14+7`
+
+> **Note**: The GitHub repository should contain a Dockerfile and tests
