@@ -28,6 +28,7 @@ This repository contains documentation, examples, and pipeline configurations do
 - [Free style job](./04-free-style-job/README.md)
 - [Pipeline job](./05-pipeline-job/README.md)
 - [Multi branch pipeline job](./06-multi-branch-pipeline-job/README.md)
+- [Generic webhook trigger](./07-generic-webhook-trigger/README.md)
 
 ## Useful Commands
 
